@@ -1,3 +1,29 @@
+function(add_wincompat tgt)
+    if(CMAKE_CXX_IS_CLANG_WIN)
+        target_compile_options(${tgt}
+            PRIVATE "-flto"
+            PRIVATE "-m32"
+            PRIVATE "-march=pentium-mmx"
+        )
+
+        target_link_libraries(${tgt}
+            PUBLIC opencow
+        )
+    elseif(MSVC)
+        target_link_libraries(${tgt}
+            PUBLIC opencow
+        )
+    else()
+        target_link_libraries(${tgt}
+            PUBLIC libcxx
+        )
+
+        target_compile_options(${tgt}
+            PRIVATE "-march=pentium-mmx"
+        )
+    endif()
+endfunction()
+
 
 #######################################################################################################
 ## oatpp
@@ -227,6 +253,8 @@ add_library(oatpp
         oatpp/web/url/mapping/Pattern.hpp
         oatpp/web/url/mapping/Router.hpp
 )
+
+add_wincompat(oatpp)
 
 set_target_properties(oatpp PROPERTIES
         CXX_STANDARD 11

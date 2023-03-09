@@ -18,7 +18,7 @@ set(OATPP_THIS_MODULE_DIRECTORIES oatpp oatpp-test) ## list of directories to in
 project(oatpp VERSION ${OATPP_THIS_MODULE_VERSION} LANGUAGES CXX)
 
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
-option(OATPP_INSTALL "Create installation target for oat++" ON)
+option(OATPP_INSTALL "Create installation target for oat++" OFF)
 option(OATPP_BUILD_TESTS "Create test target for oat++" ON)
 
 ###################################################################################################
@@ -73,6 +73,9 @@ message("\n#####################################################################
 ###################################################################################################
 
 message("oatpp version: '${OATPP_THIS_MODULE_VERSION}'")
+
+include(cmake/DetectClang.cmake)
+include(external/InitializeExternalComponents.cmake)
 
 add_subdirectory(src)
 
