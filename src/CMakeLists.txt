@@ -254,12 +254,14 @@ add_library(oatpp
         oatpp/web/url/mapping/Router.hpp
 )
 
-add_wincompat(oatpp)
+if(WIN32)
+    add_wincompat(oatpp)
+endif()
 
 set_target_properties(oatpp PROPERTIES
-        CXX_STANDARD 11
-        CXX_EXTENSIONS OFF
-        CXX_STANDARD_REQUIRED ON
+    CXX_STANDARD 11
+    CXX_EXTENSIONS OFF
+    CXX_STANDARD_REQUIRED ON
 )
 
 set(CMAKE_THREAD_PREFER_PTHREAD ON)
