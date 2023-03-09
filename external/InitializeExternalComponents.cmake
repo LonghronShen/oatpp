@@ -5,7 +5,7 @@ include(CheckIncludeFileCXX)
 
 cmake_policy(SET CMP0097 NEW)
 
-if(WIN32)
+if(CMAKE_CXX_IS_CLANG_WIN)
     CHECK_INCLUDE_FILE_CXX("unistd.h" HAS_UNISTD_H)
     if(NOT HAS_UNISTD_H)
         # unistd_h
