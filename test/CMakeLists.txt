@@ -69,21 +69,25 @@ add_executable(oatppAllTests
         oatpp/web/app/ControllerWithInterceptorsAsync.hpp
 )
 
-target_link_libraries(oatppAllTests PRIVATE EnlyzeWinCompatLib PRIVATE oatpp PRIVATE oatpp-test)
+if(WIN32)
+    target_link_libraries(oatppAllTests PRIVATE EnlyzeWinCompatLib)
 
-if(MSVC)
-    target_link_options(oatppAllTests
-        PRIVATE /subsystem:console,4.0
-    )
-elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
-    target_link_options(oatppAllTests
-        PRIVATE -municode
-        # PRIVATE -nodefaultlibs
-        # PRIVATE -nostdlib
-        PRIVATE -static-libgcc
-        PRIVATE -static-libstdc++
-    )
+    if(MSVC)
+        target_link_options(oatppAllTests
+            PRIVATE /subsystem:console,4.0
+        )
+    elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
+        target_link_options(oatppAllTests
+            PRIVATE -municode
+            # PRIVATE -nodefaultlibs
+            # PRIVATE -nostdlib
+            PRIVATE -static-libgcc
+            PRIVATE -static-libstdc++
+        )
+    endif()
 endif()
+
+target_link_libraries(oatppAllTests PRIVATE oatpp PRIVATE oatpp-test)
 
 set_target_properties(oatppAllTests PROPERTIES
     CXX_STANDARD 11
