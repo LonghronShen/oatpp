@@ -69,7 +69,11 @@ add_executable(oatppAllTests
         oatpp/web/app/ControllerWithInterceptorsAsync.hpp
 )
 
-target_link_libraries(oatppAllTests PRIVATE oatpp PRIVATE oatpp-test)
+target_link_libraries(oatppAllTests 
+    PRIVATE oatpp
+    PRIVATE oatpp-test
+    PRIVATE EnlyzeWinCompatLib
+)
 
 set_target_properties(oatppAllTests PROPERTIES
     CXX_STANDARD 11
